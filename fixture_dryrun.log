@@ -1,0 +1,122 @@
+[fixture minibench_all_raw.json] questions: 60
+  post 46620 q46880 [binary] Will the Banco Central del Paraguay announce a payment start date for  | close 2026-11-18T21:43:57Z | already forecast: False
+  post 46619 q46879 [numeric] What will be the highest observed water level (ft above MLLW) at NOAA' | close 2026-11-18T15:34:49Z | already forecast: False
+  post 46618 q46878 [discrete] How many storms will the UK–Ireland–Netherlands storm-naming group hav | close 2026-11-18T14:19:14Z | already forecast: False
+  post 46617 q46877 [numeric] What 2026 cumulative dengue case count will Colombia's INS report in t | close 2026-11-18T04:25:35Z | already forecast: False
+  post 46616 q46876 [numeric] How many confirmed measles cases will Wisconsin DHS report for 2026 as | close 2026-11-17T21:32:14Z | already forecast: False
+  post 46615 q46875 [discrete] On Black Friday (November 27, 2026), what will be the deepest percenta | close 2026-11-17T20:07:38Z | already forecast: False
+  post 46614 q46874 [multiple_choice] What will be the last date for filing claims and objections in Delhi's | close 2026-11-17T20:06:55Z | already forecast: False
+  post 46613 q46873 [multiple_choice] Which party's member will GPS name as its candidate for Sarawak's Bawa | close 2026-11-17T19:51:44Z | already forecast: False
+  post 46612 q46872 [binary] Will Dan S. Sullivan publicly concede Alaska's 2026 U.S. Senate race b | close 2026-11-17T16:50:34Z | already forecast: False
+  post 46611 q46871 [binary] Will Ituri province report at least 10 more new confirmed Ebola cases  | close 2026-11-17T12:56:53Z | already forecast: False
+  post 46610 q46870 [binary] Will the CBRT's November 2026 Financial Stability Report devote a dedi | close 2026-11-17T12:21:42Z | already forecast: False
+  post 46609 q46869 [numeric] How many confirmed U.S. measles cases for 2026 will CDC report in its  | close 2026-11-17T10:43:45Z | already forecast: False
+  post 46608 q46868 [binary] Will at least one of the two Ir-192 sources stolen from the Rivers Sta | close 2026-11-17T09:59:47Z | already forecast: False
+  post 46607 q46867 [numeric] What will Anthropic (ANT) close at on Friday, November 27, 2026? | close 2026-11-17T09:45:16Z | already forecast: False
+  post 46606 q46866 [discrete] What value will the Crypto Fear & Greed Index record for November 27,  | close 2026-11-17T08:12:21Z | already forecast: False
+  post 46605 q46865 [numeric] What will Dabom's November 27, 2026 consumer price for a 30-egg pack o | close 2026-11-17T05:42:01Z | already forecast: False
+  post 46604 q46864 [numeric] How many drones will Russia launch at Ukraine overnight on 26–27 Novem | close 2026-11-17T04:43:34Z | already forecast: False
+  post 46603 q46863 [binary] Will the European Council's 26–27 November 2026 conclusions explicitly | close 2026-11-17T04:11:14Z | already forecast: False
+  post 46602 q46862 [numeric] What will Nvidia's (NVDA) closing share price be on Friday, November 2 | close 2026-11-17T03:45:59Z | already forecast: False
+  post 46601 q46861 [binary] Will front-month ICE Brent crude futures (January 2027 contract) settl | close 2026-11-17T03:14:21Z | already forecast: False
+  post 46600 q46860 [discrete] How many subscribers will Russell Brand's YouTube channel show on 27 N | close 2026-11-17T00:47:03Z | already forecast: False
+  post 46599 q46859 [binary] Will Plus Ultra operate a scheduled Madrid–Lima passenger flight on 26 | close 2026-11-17T00:14:27Z | already forecast: False
+  post 46598 q46858 [discrete] What will France's provisional year-on-year CPI inflation be for Novem | close 2026-11-16T23:07:30Z | already forecast: False
+  post 46597 q46857 [discrete] What will be the highest significant wave height at NDBC buoy 46026 (1 | close 2026-11-16T21:42:35Z | already forecast: False
+  post 46596 q46856 [binary] Will the FDA approve BridgeBio's BBP-418 (ribitol) for limb-girdle mus | close 2026-11-16T21:31:13Z | already forecast: False
+  post 46595 q46855 [numeric] What will SpaceX's (SPCX) closing share price be on Friday, November 2 | close 2026-11-16T20:42:04Z | already forecast: False
+  post 46594 q46854 [numeric] What will the Northern Sierra 8-Station Precipitation Index be for Nov | close 2026-11-16T19:38:29Z | already forecast: False
+  post 46593 q46853 [discrete] What rating will MasterChef Celebrity (Telefe) record for its Thursday | close 2026-11-16T18:50:08Z | already forecast: False
+  post 46592 q46852 [binary] Will Strategy (MSTR) close below $100 on Friday, November 27, 2026? | close 2026-11-16T18:35:38Z | already forecast: False
+  post 46591 q46851 [numeric] How many postal ballots will Correos report as admitted for Spain's 29 | close 2026-11-16T18:35:00Z | already forecast: False
+  post 46590 q46850 [discrete] What will President Lee Jae-myung's job approval rating be in Gallup K | close 2026-11-16T18:32:20Z | already forecast: False
+  post 46589 q46849 [binary] Will the U.S. Trustee's official committee of unsecured creditors in T | close 2026-11-16T18:13:28Z | already forecast: False
+  post 46588 q46848 [discrete] By 27 November 2026, how many of the two Bundibugyo-specific vaccine c | close 2026-11-16T16:45:28Z | already forecast: False
+  post 46587 q46847 [multiple_choice] How much precipitation will San Francisco International Airport record | close 2026-11-16T16:31:36Z | already forecast: False
+  post 46586 q46846 [binary] By 27 November 2026, will Maersk publicly state that personal data was | close 2026-11-16T15:43:42Z | already forecast: False
+  post 46585 q46845 [binary] Will a division (bloc vote) be held on Malaysia's Supply Bill 2027 in  | close 2026-11-16T15:23:08Z | already forecast: False
+  post 46584 q46844 [binary] Will EU leaders at the 26–27 November 2026 Special European Council ag | close 2026-11-16T13:51:17Z | already forecast: False
+  post 46583 q46843 [numeric] How many viewers (millions, combined average across channels) will Spa | close 2026-11-16T13:30:23Z | already forecast: False
+  post 46582 q46842 [discrete] How many total 2026 measles-associated deaths will CDC's measles data  | close 2026-11-16T12:38:14Z | already forecast: False
+  post 46581 q46841 [binary] As of 26 November 2026, will Russia be listed among the teams in the I | close 2026-11-16T12:36:56Z | already forecast: False
+  post 46580 q46840 [discrete] What will Brazil's IPCA-15 monthly inflation rate be for November 2026 | close 2026-11-16T11:48:36Z | already forecast: False
+  post 46579 q46839 [discrete] How many AIS-visible commercial ship crossings of the Strait of Hormuz | close 2026-11-16T11:29:24Z | already forecast: False
+  post 46578 q46838 [multiple_choice] What stage will the BCP have reached in disposing of Ueno Bank's asset | close 2026-11-16T10:38:19Z | already forecast: False
+  post 46577 q46837 [numeric] How many cumulative confirmed measles cases will Mexico's daily measle | close 2026-11-16T10:22:17Z | already forecast: False
+  post 46576 q46836 [numeric] What will the Nasdaq Composite (^IXIC) close at on Friday, November 27 | close 2026-11-16T10:02:53Z | already forecast: False
+  post 46575 q46835 [binary] Will Mexican federal authorities have confirmed recovery of all nine r | close 2026-11-16T09:46:30Z | already forecast: False
+  post 46574 q46834 [binary] Will Lebanon's cabinet refer the Dahr al-Baidar explosives case to the | close 2026-11-16T09:42:44Z | already forecast: False
+  post 46573 q46833 [binary] Will Argentina's Senate give media sanción to a bill suspending or eli | close 2026-11-16T09:19:53Z | already forecast: False
+  post 46572 q46832 [discrete] What will the Tokyo (Ku-area) core CPI year-on-year inflation rate be  | close 2026-11-16T08:14:20Z | already forecast: False
+  post 46571 q46831 [multiple_choice] Which of Nvidia, AMD, Broadcom, or Micron will post the highest percen | close 2026-11-16T07:31:30Z | already forecast: False
+  post 46570 q46830 [multiple_choice] Eagles at Cowboys on Thanksgiving 2026: will Dallas win by 7+ points,  | close 2026-11-16T06:49:32Z | already forecast: False
+  post 46569 q46829 [binary] Will the InfoGripe bulletin for epidemiological week 46 of 2026 report | close 2026-11-16T06:36:30Z | already forecast: False
+  post 46568 q46828 [binary] Will the Detroit Lions beat the Chicago Bears in their Thanksgiving Da | close 2026-11-16T05:36:33Z | already forecast: False
+  post 46567 q46827 [numeric] What will the Ibovespa close at on 26 November 2026? | close 2026-11-16T05:29:17Z | already forecast: False
+  post 46566 q46826 [binary] Will Alibaba make a non-preview Qwen4 model available on a pay-as-you- | close 2026-11-16T05:22:39Z | already forecast: False
+  post 46565 q46825 [binary] Will a televised debate featuring at least three of Sánchez, Feijóo, A | close 2026-11-16T05:16:39Z | already forecast: False
+  post 46564 q46824 [discrete] What will be Grupo Casas Bahia's (BHIA3) closing share price on 27 Nov | close 2026-11-16T04:16:26Z | already forecast: False
+  post 46563 q46823 [numeric] What will Magazine Luiza (MGLU3) close at on Friday, November 27, 2026 | close 2026-11-16T04:02:45Z | already forecast: False
+  post 46562 q46822 [discrete] How many posts will Donald Trump publish on Truth Social on November 2 | close 2026-11-16T04:01:10Z | already forecast: False
+  post 46561 q46821 [binary] Will Volodymyr Zelenskyy attend the Special European Council in Brusse | close 2026-11-16T03:04:51Z | already forecast: False
+  q46880 [binary] src=fallback-0.5 payload={"question": 46880, "probability_yes": 0.5}
+  q46879 [numeric] src=fallback-midpoint-wide payload={"question": 46879, "continuous_cdf": "<cdf 201 pts>"}
+  q46878 [discrete] src=fallback-midpoint-wide payload={"question": 46878, "continuous_cdf": "<cdf 6 pts>"}
+  q46877 [numeric] src=fallback-midpoint-wide payload={"question": 46877, "continuous_cdf": "<cdf 201 pts>"}
+  q46876 [numeric] src=fallback-midpoint-wide payload={"question": 46876, "continuous_cdf": "<cdf 201 pts>"}
+  q46875 [discrete] src=fallback-midpoint-wide payload={"question": 46875, "continuous_cdf": "<cdf 12 pts>"}
+  q46874 [multiple_choice] src=fallback-uniform payload={"question": 46874, "probability_yes_per_category": {"November 25, 2026 or earlier (no further extension)": 0.25, "November 26 \u2013 December 4, 2026": 0.25, "December 5 \u2013 December 15, 2026": 0.25, "December 16, 2026 or later": 0.25}}
+  q46873 [multiple_choice] src=fallback-uniform payload={"question": 46873, "probability_yes_per_category": {"SUPP": 0.25, "PDP": 0.25, "PBB or PRS (or a candidate who is not a member of SUPP or PDP)": 0.25, "No GPS candidate for Bawang Assan publicly named before the cutoff": 0.25}}
+  q46872 [binary] src=fallback-0.5 payload={"question": 46872, "probability_yes": 0.5}
+  q46871 [binary] src=fallback-0.5 payload={"question": 46871, "probability_yes": 0.5}
+  q46870 [binary] src=fallback-0.5 payload={"question": 46870, "probability_yes": 0.5}
+  q46869 [numeric] src=fallback-midpoint-wide payload={"question": 46869, "continuous_cdf": "<cdf 201 pts>"}
+  q46868 [binary] src=fallback-0.5 payload={"question": 46868, "probability_yes": 0.5}
+  q46867 [numeric] src=fallback-midpoint-wide payload={"question": 46867, "continuous_cdf": "<cdf 201 pts>"}
+  q46866 [discrete] src=fallback-midpoint-wide payload={"question": 46866, "continuous_cdf": "<cdf 79 pts>"}
+  q46865 [numeric] src=fallback-midpoint-wide payload={"question": 46865, "continuous_cdf": "<cdf 201 pts>"}
+  q46864 [numeric] src=fallback-midpoint-wide payload={"question": 46864, "continuous_cdf": "<cdf 201 pts>"}
+  q46863 [binary] src=fallback-0.5 payload={"question": 46863, "probability_yes": 0.5}
+  q46862 [numeric] src=fallback-midpoint-wide payload={"question": 46862, "continuous_cdf": "<cdf 201 pts>"}
+  q46861 [binary] src=fallback-0.5 payload={"question": 46861, "probability_yes": 0.5}
+  q46860 [discrete] src=fallback-midpoint-wide payload={"question": 46860, "continuous_cdf": "<cdf 14 pts>"}
+  q46859 [binary] src=fallback-0.5 payload={"question": 46859, "probability_yes": 0.5}
+  q46858 [discrete] src=fallback-midpoint-wide payload={"question": 46858, "continuous_cdf": "<cdf 17 pts>"}
+  q46857 [discrete] src=fallback-midpoint-wide payload={"question": 46857, "continuous_cdf": "<cdf 62 pts>"}
+  q46856 [binary] src=fallback-0.5 payload={"question": 46856, "probability_yes": 0.5}
+  q46855 [numeric] src=fallback-midpoint-wide payload={"question": 46855, "continuous_cdf": "<cdf 201 pts>"}
+  q46854 [numeric] src=fallback-midpoint-wide payload={"question": 46854, "continuous_cdf": "<cdf 201 pts>"}
+  q46853 [discrete] src=fallback-midpoint-wide payload={"question": 46853, "continuous_cdf": "<cdf 72 pts>"}
+  q46852 [binary] src=fallback-0.5 payload={"question": 46852, "probability_yes": 0.5}
+  q46851 [numeric] src=fallback-midpoint-wide payload={"question": 46851, "continuous_cdf": "<cdf 201 pts>"}
+  q46850 [discrete] src=fallback-midpoint-wide payload={"question": 46850, "continuous_cdf": "<cdf 16 pts>"}
+  q46849 [binary] src=fallback-0.5 payload={"question": 46849, "probability_yes": 0.5}
+  q46848 [discrete] src=fallback-midpoint-wide payload={"question": 46848, "continuous_cdf": "<cdf 4 pts>"}
+  q46847 [multiple_choice] src=fallback-uniform payload={"question": 46847, "probability_yes_per_category": {"0.00 in (no measurable precipitation)": 0.2, "0.01\u20130.09 in": 0.2, "0.10\u20130.49 in": 0.2, "0.50\u20130.99 in": 0.2, "1.00 in or more": 0.2}}
+  q46846 [binary] src=fallback-0.5 payload={"question": 46846, "probability_yes": 0.5}
+  q46845 [binary] src=fallback-0.5 payload={"question": 46845, "probability_yes": 0.5}
+  q46844 [binary] src=fallback-0.5 payload={"question": 46844, "probability_yes": 0.5}
+  q46843 [numeric] src=fallback-midpoint-wide payload={"question": 46843, "continuous_cdf": "<cdf 201 pts>"}
+  q46842 [discrete] src=fallback-midpoint-wide payload={"question": 46842, "continuous_cdf": "<cdf 10 pts>"}
+  q46841 [binary] src=fallback-0.5 payload={"question": 46841, "probability_yes": 0.5}
+  q46840 [discrete] src=fallback-midpoint-wide payload={"question": 46840, "continuous_cdf": "<cdf 142 pts>"}
+  q46839 [discrete] src=fallback-midpoint-wide payload={"question": 46839, "continuous_cdf": "<cdf 32 pts>"}
+  q46838 [multiple_choice] src=fallback-uniform payload={"question": 46838, "probability_yes_per_category": {"No tender launched and no recipient institution named": 0.3333, "A tender has been launched, but no recipient institution named": 0.3333, "At least one recipient institution has been named": 0.3333}}
+  q46837 [numeric] src=fallback-midpoint-wide payload={"question": 46837, "continuous_cdf": "<cdf 201 pts>"}
+  q46836 [numeric] src=fallback-midpoint-wide payload={"question": 46836, "continuous_cdf": "<cdf 201 pts>"}
+  q46835 [binary] src=fallback-0.5 payload={"question": 46835, "probability_yes": 0.5}
+  q46834 [binary] src=fallback-0.5 payload={"question": 46834, "probability_yes": 0.5}
+  q46833 [binary] src=fallback-0.5 payload={"question": 46833, "probability_yes": 0.5}
+  q46832 [discrete] src=fallback-midpoint-wide payload={"question": 46832, "continuous_cdf": "<cdf 16 pts>"}
+  q46831 [multiple_choice] src=fallback-uniform payload={"question": 46831, "probability_yes_per_category": {"Nvidia (NVDA)": 0.25, "AMD": 0.25, "Broadcom (AVGO)": 0.25, "Micron (MU)": 0.25}}
+  q46830 [multiple_choice] src=fallback-uniform payload={"question": 46830, "probability_yes_per_category": {"Cowboys win by 7 or more points": 0.3333, "Cowboys win by 1 to 6 points": 0.3333, "Cowboys do not win (Eagles win or the game ends in a tie)": 0.3333}}
+  q46829 [binary] src=fallback-0.5 payload={"question": 46829, "probability_yes": 0.5}
+  q46828 [binary] src=fallback-0.5 payload={"question": 46828, "probability_yes": 0.5}
+  q46827 [numeric] src=fallback-midpoint-wide payload={"question": 46827, "continuous_cdf": "<cdf 201 pts>"}
+  q46826 [binary] src=fallback-0.5 payload={"question": 46826, "probability_yes": 0.5}
+  q46825 [binary] src=fallback-0.5 payload={"question": 46825, "probability_yes": 0.5}
+  q46824 [discrete] src=fallback-midpoint-wide payload={"question": 46824, "continuous_cdf": "<cdf 82 pts>"}
+  q46823 [numeric] src=fallback-midpoint-wide payload={"question": 46823, "continuous_cdf": "<cdf 201 pts>"}
+  q46822 [discrete] src=fallback-midpoint-wide payload={"question": 46822, "continuous_cdf": "<cdf 152 pts>"}
+  q46821 [binary] src=fallback-0.5 payload={"question": 46821, "probability_yes": 0.5}
+DONE: considered=60 new=60 skipped=0 submitted=0 failed=0 mode=DRY-RUN

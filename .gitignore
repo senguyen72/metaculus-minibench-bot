@@ -1,0 +1,8 @@
+# Never commit secrets or local raw dumps.
+config.json
+minibench_*_raw.json
+__pycache__/
+# NOTE: state.json is INTENTIONALLY committed (it holds only submitted
+# question ids + timestamps, no secrets) so scheduled runs don't
+# re-submit the same questions. run.log is visible in the Actions UI
+# and is not committed.
