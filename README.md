@@ -12,7 +12,7 @@ Baseline forecasting bot for the Metaculus MiniBench tournament series
 | `research.py` | Research + calibration layer (v2): free news fetch (AskNews if keyed, else Google News RSS / GDELT), evidence scoring, optional OpenRouter LLM step |
 | `config.json` | Account + `METACULUS_TOKEN` (chmod 600; **never commit, never paste in chat**). Optional keys live here too: `asknews_api_key`, `openrouter_api_key`, `openrouter_model` (same rule) |
 | `state.json` | Submitted question ids (created on first real submit; committed so runs don't double-submit) |
-| `.github/workflows/forecast.yml` | GitHub Actions: runs `bot.py --submit` every 6h |
+| `.github/workflows/forecast.yml` | GitHub Actions: runs `bot.py --submit` every hour |
 | `.gitignore` | Keeps `config.json` + raw dumps out of git |
 | `openapi.yml` | Official Metaculus OpenAPI spec v2.0.0 (downloaded 23/11/2026) |
 | `minibench_all_raw.json` | Saved `/api/posts/?tournaments=minibench` response (60 questions, round 16/11–04/12/2026) — fixture for offline dry-runs |
@@ -70,7 +70,7 @@ configured) → news research (heuristic) → honest fallback.**
    `METACULUS_TOKEN` = the bot token from `config.json`.
 3. Settings → Actions → General → Workflow permissions → **Read and write**
    (so the workflow can commit `state.json` back).
-4. The workflow runs every 6 hours and on manual dispatch.
+4. The workflow runs every hour and on manual dispatch.
 
 ## Status (27/11/2026)
 
@@ -78,11 +78,10 @@ configured) → news research (heuristic) → honest fallback.**
   PASS, research-test PASS (live news), fixture dry-run on 60 real
   MiniBench questions PASS (all payloads build, 0 submitted), live
   dry-run 27/11: **0 open questions** in the current MiniBench round.
-- **Code changes are LOCAL ONLY (not pushed to GitHub yet):** the live
-  workflow still runs bot v1 until `bot.py` + `research.py` are pushed
-  and the run is verified. Do NOT push without the owner's go-ahead —
-  the next scheduled run after a push would submit real forecasts with
-  the new code.
+- **Bot v2 pushed (commit 2df54ec, 27/11/2026) and live:** `bot.py` + `research.py`
+  (research + calibration) are on GitHub; the workflow now runs hourly. A
+  manual Actions run after the push completed SUCCESS in 12s. The scheduled
+  workflow will submit real forecasts when questions open.
 - **0 open questions** in the current MiniBench round (16/11–04/12/2026):
   all 60 questions closed 16–18/11. Nothing to submit yet. The next
   round is expected ~30/11/2026 (bi-weekly; questions usually launch the
