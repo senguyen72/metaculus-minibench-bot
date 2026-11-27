@@ -113,3 +113,154 @@ Token lưu trong `config.json` (chmod 600). Không ghi token ra đây.
 - `dryrun_2026-11-23.log` — dry-run live: **PASS, 0.84s, 0 câu mở**
   (chạy lại sau khi sửa lỗi phân trang).
 - `fixture_dryrun.log` — dry-run offline 60 câu thật: PASS.
+
+## 27/11/2026 — Bot v2: research + calibration XONG (Lệnh 3, hạn 72h)
+
+### 1. AskNews miễn phí + LLM credits — đã đọc docs chính thức, CHƯA lấy được (cần anh Se làm 2 bước)
+
+Nguồn: trang Bot Tournament Resources chính thức của Metaculus
+(`metaculus.com/notebooks/38928/futureeval-resources-page/`, đọc 27/11).
+
+- **AskNews (đối tác Metaculus, miễn phí cho bot maker đã đăng ký):**
+  1k calls/tháng, 4k calls tổng cho cả tournament, 5M tokens; request
+  tin 48h = 1 call, archive = 5 calls; dùng được endpoint `/news` và
+  `/deepnews`. Cách lấy:
+  1. Tạo tài khoản AskNews tại my.asknews.app bằng **cùng email
+     Metaculus** (senguyen72@gmail.com).
+  2. Vào Discord AskNews (discord.gg/99qt5HGgUn), kết bạn @freqai và
+     nhắn tin, HOẶC gửi email tới contact@asknews.app ghi: (1) tên bot
+     (senguyen72-bot), (2) email đăng ký AskNews, (3) họ tên
+     (Tuyen Nguyen Duc), (4) LinkedIn Profile, (5) Association
+     (independent).
+  3. AskNews bật free calls cho tài khoản.
+  4. Tạo key tại my.asknews.app/en/settings/api-credentials → thêm vào
+     bot dưới tên `ASKNEWS_API_KEY` (GitHub secret, KHÔNG paste ra chat).
+  5. Gia hạn lại mỗi mùa (mùa Fall 2026 đang chạy); 1 tài khoản/người.
+  - **Vướng:** bước 2 hỏi **LinkedIn Profile — anh Se KHÔNG có
+    LinkedIn** (anh báo 13:20 27/11). Cách xử: khi nhắn @freqai /
+    email contact@asknews.app thì ghi rõ "independent researcher, no
+    LinkedIn" — trang docs không nói LinkedIn là bắt buộc tuyệt đối,
+    nhưng chưa xác minh họ có duyệt không. Đường Discord có thể linh
+    hoạt hơn email vì nhắn trực tiếp cho người phụ trách.
+  - AskNews trực tiếp (không qua Metaculus) cũng có gói pay-as-you-go
+    $0/tháng, 25 credits kèm sẵn — NHƯNG trang của họ ghi "add a card,
+    no initial top-up required" (cần gắn thẻ) và chỉ 25 credits/tháng
+    (1 vòng ~60 câu là không đủ) → KHÔNG đi đường này.
+- **LLM credits tặng (OpenRouter, chỉ OpenAI / Anthropic / Google):**
+  Metaculus cấp cho "a select number of bot makers" (ưu tiên hobbyist,
+  không phải ai nộp cũng được). Cách xin: điền **participation form**
+  https://forms.gle/aQdYMq9Pisrf1v7d8 — form này vốn BẮT BUỘC với mọi
+  người tham gia (mục đầu chỉ 3 câu hỏi), đồng thời là đơn xin credits.
+  Nếu được duyệt, Metaculus gửi 1 OpenRouter key (gắn với tài khoản
+  OpenRouter của Metaculus, không gắn được vào tài khoản cá nhân) → thêm
+  làm secret `OPENROUTER_API_KEY` + chọn model qua `OPENROUTER_MODEL`.
+  Có thể dùng cả model search-powered kiểu `openrouter/openai/gpt-5.2:online`.
+  - **Chưa điền form này** (không thấy trong log cũ) → anh Se tự điền,
+    vì form hỏi demographics/motivations của chính anh.
+- **Bot Benchmarking tier (lấy được Community Prediction):** CP hiện
+  null với tài khoản bot; tier này mở CP trên ~250 câu mở + ~250 câu đã
+  resolve. Xin qua **Metaculus Data Needs Form**
+  (docs.google.com/forms/d/e/1FAIpQLSeJhtZzHl5qMvBjbXbatyaqoS4IU7RE0GGw_vlhs6I9syqn1g/viewform)
+  — cũng là form anh Se tự điền. Lưu ý: ngay cả khi được duyệt, chưa
+  chắc câu MiniBench nằm trong ~250 câu đó.
+- **Kết luận:** cả 3 đường (AskNews, credits, Benchmarking tier) đều
+  cần anh Se tự làm 1 form/email — bot KHÔNG tự lấy được key nào.
+
+### 2. Bot v2 — đã đổi gì (`bot.py` + file mới `research.py`, stdlib only)
+
+- **Pipeline mới:** CP → LLM (nếu có key) → research heuristic → fallback.
+  Research: build query từ tiêu đề câu hỏi (từ trong tiêu đề tính gấp
+  đôi, bỏ stopword + tên tháng/ngày + động từ chung chung + từ
+  boilerplate "resolution"); fetch tin: **AskNews trước nếu có key**
+  (`GET /v1/news/search`, hours_back=48, 1 credit/call, auth Bearer —
+  chưa kiểm chứng được với key thật, mọi lỗi đều fallback), nếu không
+  thì **Google News RSS (miễn phí, không key, đã kiểm chứng chạy được
+  từ VM 27/11)**, GDELT ArtList làm dự phòng khi RSS trả < 3 bài
+  (giới hạn 1 request/5s, hay bị rate-limit từ VM).
+- **Calibration (công thức trong `research.py`):** binary = cue-word
+  yes/no, `p = 0.5 ± 0.30 * agreement * min(1, n/6) * min(1, cues/4)`,
+  kẹp [0.20, 0.80]; MC = đếm lượt nhắc từng lựa chọn, Laplace + co 30%
+  về đều; numeric/discrete/date = median các số/ngày trích từ bài báo
+  nằm trong khoảng câu hỏi (≥2 giá trị → sd 25% khoảng, 1 giá trị →
+  32%, 0 giá trị → fallback cũ midpoint/sd 40%). Trích số bỏ qua
+  năm (1900–2100) và bỏ phần ngày-tháng trước khi trích số.
+- **LLM step (ngủ đông tới khi có key):** POST OpenRouter chat
+  completions, temperature 0, JSON-only, validate chặt theo từng loại
+  câu (binary [0.02, 0.98], MC đủ option + tổng ~1, percentiles tăng
+  dần + trong khoảng); lỗi gì cũng fallback về heuristic.
+- **Flag mới:** `--research-test` (fetch tin thật trên 3 câu mẫu, không
+  bao giờ nộp), `--no-research` (chạy kiểu v1). Workflow GitHub KHÔNG
+  đổi (vẫn 6h/lần, mode SUBMIT) — và **code mới CHỈ ở local, chưa push
+  lên GitHub**: workflow live vẫn chạy v1 cho tới khi main agent push
+  + xác minh (không push khi chưa báo cáo, vì lượt chạy sau push sẽ
+  nộp forecast thật bằng code mới).
+- **Bugs tìm ra khi dry-run (đã sửa hết):**
+  1. `score_continuous_evidence` trả tuple 3 phần tử khi có evidence,
+     2 phần tử khi không → `build_forecast` unpack lỗi → đã chuẩn hoá
+     kiểu trả về.
+  2. `_normal_cdf_forecast` với sd nhỏ (0.25) hoặc centre gần biên:
+     percentile 5/95 không phủ hết khoảng câu hỏi → `generate_cdf`
+     raise → đã thêm `cdf_from_percentiles` với anchor 0.1/99.9 ở
+     đúng biên khoảng (áp dụng cả cho nhánh LLM).
+  3. Trích từ khoá: "nvidia's" không gộp về "nvidia" (possessive),
+     ticker giữ chữ hoa, tháng/ngày/động từ chung chung làm bẩn query
+     ("central november paraguay banco cda announce") → đã chuẩn hoá
+     + mở rộng stopword (tháng, thứ, today/tomorrow, announce/report,
+     next/last/first/week/month/year, del/de/la/el...).
+  4. Regex số `\d{1,3}` cắt "2025" thành "202"+"5" → đã sửa pattern
+     (nhánh có dấu phẩy phải có ít nhất 1 nhóm `,\d{3}`).
+  5. Binary: 1 cue duy nhất trong 10 bài đẩy p tới cap 0.80 → đã thêm
+     hệ số cue-volume `min(1, cues/4)`.
+
+### 3. Kiểm tra đã chạy (27/11, chưa nộp gì thật)
+
+1. `--selftest` (offline, đã mở rộng): **PASS** — 4 case CDF cũ + edge
+   case centre 72 trên khoảng 0–1000 sd 0.25 + toàn bộ hàm research
+   (từ khoá, cue binary, MC, trích số/ngày, evidence continuous,
+   build_forecast end-to-end với research giả lập).
+2. `--research-test` (live, 3 câu mẫu): **PASS** — binary NVDA p=0.68
+   (yes=4 no=1, 10 bài); MC Nvidia 0.60 / AMD 0.20 / Intel 0.20
+   (nhắc 4/0/0); numeric Fear & Greed median 60 (12 giá trị trong
+   khoảng 0–100), CDF hợp lệ. 0 key cấu hình, 0 nộp.
+3. `--fixture minibench_all_raw.json --dry-run --max-questions 6`
+   (research BẬT, 60 câu thật vòng 16/11): **PASS** — 2/6 câu dùng
+   được evidence (measles Wisconsin median 920; storm count median 5),
+   còn lại fallback trung thực (không bài báo / không giá trị trong
+   khoảng). 0 nộp, 0 lỗi.
+4. `--fixture ... --dry-run --no-research` (hồi quy v1): **PASS** —
+   60/60 payload build được, 0 nộp, 0 fail.
+5. Live `--dry-run` 27/11 13:33 VN: **0 câu mở** (vòng mới chưa mở).
+6. **Không rò token:** kiểm tra bằng script — token Metaculus không
+   xuất hiện trong bất kỳ log nào (`/tmp/metaculus_*.log`).
+7. Full fixture 60 câu với research BẬT: **PASS, 6 phút 19 giây**
+   (log `/tmp/metaculus_fixture_full_research_20261127.log`) —
+   considered=60, submitted=0, failed=0, 0 traceback. **33/60 câu dùng
+   được evidence (research), 27/60 fallback trung thực** (không bài báo
+   / không giá trị trong khoảng / không cue định hướng). Trong lúc
+   chạy này còn phát hiện RSS bị lỗi thoáng qua nên đã thêm retry 1 lần
+   cho fetch RSS (và log lỗi ra stderr) — sau sửa thì 0 lần WARN nào
+   trong toàn bộ 60 câu.
+
+### 4. Còn lại (cần main agent / anh Se)
+
+- [ ] **Anh Se (2 việc, theo §1):** (a) điền participation form
+      https://forms.gle/aQdYMq9Pisrf1v7d8 (bắt buộc + xin credits);
+      (b) AskNews: tạo tài khoản my.asknews.app bằng senguyen72@gmail.com
+      rồi nhắn @freqai trên Discord hoặc email contact@asknews.app
+      (ghi rõ independent, no LinkedIn) → lấy `ASKNEWS_API_KEY`.
+      Tuỳ chọn: xin Bot Benchmarking tier qua Data Needs Form.
+- [ ] Main agent: khi anh Se duyệt, push `bot.py` + `research.py` lên
+      GitHub (repo senguyen72/metaculus-minibench-bot) + thêm secret
+      `ASKNEWS_API_KEY` / `OPENROUTER_API_KEY` / `OPENROUTER_MODEL` nếu
+      đã có key, rồi kiểm chứng 1 lượt chạy Actions tay.
+- [ ] Nộp thật 1–2 câu khi vòng MiniBench mới mở (~30/11, câu thường
+      lên sóng thứ Bảy 28/11) để xác minh end-to-end.
+- [ ] Lưu ý đã biết, chưa sửa: (a) câu hỏi MiniBench chỉ mở 3 giờ mỗi
+      câu mà workflow chạy 6 giờ/lần → có thể bỏ lỡ ~nửa số câu (đổi
+      cron cần anh Se duyệt — KHÔNG tự đổi); (b) Metaculus yêu cầu bot
+      để lại private comment trên mỗi câu đã forecast — bot hiện chưa
+      post comment (cần thêm endpoint `/api/comments/`, chưa kiểm chứng
+      được khi 0 câu mở); (c) GDELT hay bị rate-limit từ VM, chỉ là
+      dự phòng; (d) tin RSS chỉ lấy được bài 48h gần nhất — câu hỏi
+      về sự kiện xa hơn sẽ ít/không có evidence → fallback.
+

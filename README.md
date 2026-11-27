@@ -9,7 +9,8 @@ Baseline forecasting bot for the Metaculus MiniBench tournament series
 | File | What it is |
 | --- | --- |
 | `bot.py` | The bot (Python 3, **stdlib only** — no dependencies, no paid services, no LLM calls) |
-| `config.json` | Account + `METACULUS_TOKEN` (chmod 600; **never commit, never paste in chat**) |
+| `research.py` | Research + calibration layer (v2): free news fetch (AskNews if keyed, else Google News RSS / GDELT), evidence scoring, optional OpenRouter LLM step |
+| `config.json` | Account + `METACULUS_TOKEN` (chmod 600; **never commit, never paste in chat**). Optional keys live here too: `asknews_api_key`, `openrouter_api_key`, `openrouter_model` (same rule) |
 | `state.json` | Submitted question ids (created on first real submit; committed so runs don't double-submit) |
 | `.github/workflows/forecast.yml` | GitHub Actions: runs `bot.py --submit` every 6h |
 | `.gitignore` | Keeps `config.json` + raw dumps out of git |
@@ -20,22 +21,41 @@ Baseline forecasting bot for the Metaculus MiniBench tournament series
 ## Usage
 
 ```bash
-python3 bot.py --selftest                                        # offline CDF checks
+python3 bot.py --selftest                                        # offline CDF + research checks
+python3 bot.py --research-test                                   # live news fetch on 3 samples, never submits
 python3 bot.py --dry-run                                          # live list, print forecasts, submit nothing
 python3 bot.py --fixture minibench_all_raw.json --dry-run          # offline, real question shapes
 python3 bot.py --submit --tournament minibench                    # submit for real
 python3 bot.py --list-only                                        # just list open questions
+python3 bot.py --dry-run --no-research                            # skip the news-research step
 ```
 
-## How it forecasts (baseline v1 — honest, uninformative where it has no edge)
+## How it forecasts (v2 — research + calibration, 27/11/2026)
+
+Evidence order per question: **Community Prediction → LLM (if keys
+configured) → news research (heuristic) → honest fallback.**
 
 - **Anchor:** Community Prediction (CP), when the API returns it —
   binary shrunk 15% toward 0.5 (clamped [0.02, 0.98]); multiple-choice
   shrunk 15% toward uniform; continuous centred on the CP median.
-- **Fallback (the normal case — see PROGRESS.md):** CP is `null` for bot
-  accounts on MiniBench posts, so the bot uses maximum-entropy fallbacks:
-  binary 0.5, multiple-choice uniform, numeric/discrete/date a broad
-  normal CDF centred on the range midpoint (sd = 40% of range).
+- **Research (v2):** CP is `null` for bot accounts on MiniBench posts, so
+  the bot fetches recent news for the question — AskNews first if an
+  `ASKNEWS_API_KEY` is configured (free Metaculus-partnered access, see
+  PROGRESS.md), otherwise free Google News RSS, with GDELT as a backup —
+  and scores the evidence deterministically: binary cue-word votes
+  (clamped to [0.20, 0.80], scaled by agreement, article count and cue
+  volume), multiple-choice option-mention counts (Laplace-smoothed, shrunk
+  30% toward uniform), numeric/discrete/date medians of numbers/dates
+  extracted from article text (sd 25–32% of range with evidence, 40%
+  without). No usable evidence → the honest fallback below.
+- **Optional LLM step (dormant until keys exist):** with
+  `OPENROUTER_API_KEY` + `OPENROUTER_MODEL` configured (donated Metaculus
+  credits via OpenRouter), the model forecasts from the question + news
+  summaries; its JSON is strictly validated and any failure falls back to
+  the heuristic evidence. See PROGRESS.md for how to obtain the keys.
+- **Fallback (the normal case when nothing else applies):** binary 0.5,
+  multiple-choice uniform, numeric/discrete/date a broad normal CDF
+  centred on the range midpoint (sd = 40% of range).
 - CDFs follow the official spec exactly (201 points, min step 0.01/200,
   max step 0.2, bound rules) and are validated before submitting; a bad
   CDF is never submitted.
@@ -52,15 +72,29 @@ python3 bot.py --list-only                                        # just list op
    (so the workflow can commit `state.json` back).
 4. The workflow runs every 6 hours and on manual dispatch.
 
-## Status (23/11/2026)
+## Status (27/11/2026)
 
-- Bot built, selftest PASS, fixture dry-run on 60 real MiniBench
-  questions PASS (all 4 types, all CDFs valid), forecast-endpoint
-  verified live (POST to a closed question correctly returns 405).
+- Bot v2 built: research + calibration (see PROGRESS.md §27/11). Selftest
+  PASS, research-test PASS (live news), fixture dry-run on 60 real
+  MiniBench questions PASS (all payloads build, 0 submitted), live
+  dry-run 27/11: **0 open questions** in the current MiniBench round.
+- **Code changes are LOCAL ONLY (not pushed to GitHub yet):** the live
+  workflow still runs bot v1 until `bot.py` + `research.py` are pushed
+  and the run is verified. Do NOT push without the owner's go-ahead —
+  the next scheduled run after a push would submit real forecasts with
+  the new code.
 - **0 open questions** in the current MiniBench round (16/11–04/12/2026):
   all 60 questions closed 16–18/11. Nothing to submit yet. The next
   round is expected ~30/11/2026 (bi-weekly; questions usually launch the
   Saturday before). The scheduled workflow will catch it when it opens.
+- **Still needs Se (see PROGRESS.md §27/11 for exact steps):** (1) fill
+  out the Metaculus participation form (required for all participants;
+  also the application for donated OpenRouter LLM credits); (2) AskNews
+  free access — create an account with senguyen72@gmail.com, then email
+  contact@asknews.app or DM @freqai on Discord (note: the form asks for
+  a LinkedIn profile and Se has none — say so in the message);
+  (3) optionally request the Bot Benchmarking tier via the Data Needs
+  form to get Community Prediction access.
 - See `PROGRESS.md` for the full log, including the two verified API
   limitations (CP is null for bot accounts; `my_forecasts` absent from
   the list endpoint) and the VM egress flakiness to metaculus.com.

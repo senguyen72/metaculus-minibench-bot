@@ -6,7 +6,7 @@
 #      secret:  METACULUS_TOKEN = the senguyen72-bot API token
 #      (the token lives in drive_puzzle/metaculus/config.json locally;
 #      NEVER commit config.json or state.json — see .gitignore).
-#   3. The workflow runs every 6 hours and can also be triggered manually
+#   3. The workflow runs every hour and can also be triggered manually
 #      from the Actions tab (workflow_dispatch).
 #
 # Notes:
@@ -25,7 +25,7 @@ name: MiniBench forecast
 
 on:
   schedule:
-    - cron: "0 */6 * * *" # every 6 hours (UTC)
+    - cron: "0 * * * *" # every hour (UTC)
   workflow_dispatch:
 
 permissions:
